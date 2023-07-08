@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    // ESLint
+    "dbaeumer.vscode-eslint",
+    // Editor Config
+    "editorconfig.editorconfig",
+    // Prettier for js/ts
+    "esbenp.prettier-vscode",
+    // Spell checker
+    "streetsidesoftware.code-spell-checker",
+    // GitLens
+    "eamodio.gitlens"
+  ]
+}

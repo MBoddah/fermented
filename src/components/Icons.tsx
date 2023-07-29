@@ -82,4 +82,99 @@ export const Icons = {
             <path d='M1 1h22v22H1z' fill='none' />
         </svg>
     ),
+    yandex: (props: LucideProps) => (
+        <svg
+            {...props}
+            xmlns='http://www.w3.org/2000/svg'
+            x='0px'
+            y='0px'
+            width='144'
+            height='144'
+            viewBox='0 0 48 48'
+        >
+            <linearGradient
+                id='lpa7hSZqz_S376v76E9kia_wQ15B9zLAw61_gr1'
+                x1='13.239'
+                x2='37.906'
+                y1='1.907'
+                y2='33.479'
+                gradientUnits='userSpaceOnUse'
+            >
+                <stop offset='0' stopColor='#f52537'></stop>
+                <stop offset='.293' stopColor='#f32536'></stop>
+                <stop offset='.465' stopColor='#ea2434'></stop>
+                <stop offset='.605' stopColor='#dc2231'></stop>
+                <stop offset='.729' stopColor='#c8202c'></stop>
+                <stop offset='.841' stopColor='#ae1e25'></stop>
+                <stop offset='.944' stopColor='#8f1a1d'></stop>
+                <stop offset='1' stopColor='#7a1818'></stop>
+            </linearGradient>
+            <path
+                fill='url(#lpa7hSZqz_S376v76E9kia_wQ15B9zLAw61_gr1)'
+                d='M32,24h-7l8-18h7L32,24z M27,36.689	c0-4.168-0.953-8.357-2.758-12.117L15,6H8l10.833,21.169C20.251,30.123,21,33.415,21,36.689V42h6V36.689z'
+            ></path>
+        </svg>
+    ),
+    vk: (props: LucideProps) => (
+        <svg
+            {...props}
+            xmlns='http://www.w3.org/2000/svg'
+            x='0px'
+            y='0px'
+            width='144'
+            height='144'
+            viewBox='0,0,256,256'
+        >
+            <g
+                fill='#ffffff'
+                fillRule='nonzero'
+                stroke='none'
+                strokeWidth='1'
+                strokeLinecap='butt'
+                strokeLinejoin='miter'
+                strokeMiterlimit='10'
+                strokeDasharray=''
+                strokeDashoffset='0'
+                fontFamily='none'
+                fontWeight='none'
+                fontSize='none'
+                textAnchor='none'
+            >
+                <g transform='scale(5.33333,5.33333)'>
+                    <path d='M45.763,35.202c-1.797,-3.234 -6.426,-7.12 -8.337,-8.811c-0.523,-0.463 -0.579,-1.264 -0.103,-1.776c3.647,-3.919 6.564,-8.422 7.568,-11.143c0.443,-1.202 -0.474,-2.472 -1.766,-2.472h-3.753c-1.237,0 -1.961,0.444 -2.306,1.151c-3.031,6.211 -5.631,8.899 -7.451,10.47c-1.019,0.88 -2.608,0.151 -2.608,-1.188c0,-2.58 0,-5.915 0,-8.28c0,-1.147 -0.938,-2.075 -2.095,-2.075l-6.856,-0.078c-0.863,0 -1.356,0.977 -0.838,1.662l1.132,1.625c0.426,0.563 0.656,1.248 0.656,1.951l-0.006,7.318c0,1.273 -1.543,1.895 -2.459,1.003c-3.099,-3.018 -5.788,-9.181 -6.756,-12.128c-0.28,-0.853 -1.079,-1.429 -1.985,-1.431l-3.697,-0.009c-1.387,0 -2.401,1.315 -2.024,2.639c3.378,11.857 10.309,23.137 22.661,24.36c1.217,0.12 2.267,-0.86 2.267,-2.073v-3.846c0,-1.103 0.865,-2.051 1.977,-2.079c0.039,-0.001 0.078,-0.001 0.117,-0.001c3.267,0 6.926,4.755 8.206,6.979c0.368,0.64 1.056,1.03 1.8,1.03h4.973c1.451,0 2.382,-1.539 1.683,-2.798z'></path>
+                </g>
+            </g>
+        </svg>
+    ),
+    apple: (props: LucideProps) => (
+        <svg
+            {...props}
+            xmlns='http://www.w3.org/2000/svg'
+            x='0px'
+            y='0px'
+            width='30'
+            height='30'
+            viewBox='0,0,256,256'
+        >
+            <g
+                fill='#ffffff'
+                fillRule='nonzero'
+                stroke='none'
+                strokeWidth='1'
+                strokeLinecap='butt'
+                strokeLinejoin='miter'
+                strokeMiterlimit='10'
+                strokeDasharray=''
+                strokeDashoffset='0'
+                fontFamily='none'
+                fontWeight='none'
+                fontSize='none'
+                textAnchor='none'
+            >
+                <g transform='scale(8.53333,8.53333)'>
+                    <path d='M25.565,9.785c-0.123,0.077 -3.051,1.702 -3.051,5.305c0.138,4.109 3.695,5.55 3.756,5.55c-0.061,0.077 -0.537,1.963 -1.947,3.94c-1.119,1.703 -2.361,3.42 -4.247,3.42c-1.794,0 -2.438,-1.135 -4.508,-1.135c-2.223,0 -2.852,1.135 -4.554,1.135c-1.886,0 -3.22,-1.809 -4.4,-3.496c-1.533,-2.208 -2.836,-5.673 -2.882,-9c-0.031,-1.763 0.307,-3.496 1.165,-4.968c1.211,-2.055 3.373,-3.45 5.734,-3.496c1.809,-0.061 3.419,1.242 4.523,1.242c1.058,0 3.036,-1.242 5.274,-1.242c0.966,0.001 3.542,0.292 5.137,2.745zM15.001,6.688c-0.322,-1.61 0.567,-3.22 1.395,-4.247c1.058,-1.242 2.729,-2.085 4.17,-2.085c0.092,1.61 -0.491,3.189 -1.533,4.339c-0.935,1.242 -2.545,2.177 -4.032,1.993z'></path>
+                </g>
+            </g>
+        </svg>
+    ),
 };

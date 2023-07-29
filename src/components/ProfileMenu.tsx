@@ -11,6 +11,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { PersonIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 export const ProfileMenu = () => {
@@ -31,12 +32,16 @@ export const ProfileMenu = () => {
                     {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className='w-56'>
+            <DropdownMenuContent className='w-56 relative'>
                 <DropdownMenuLabel>Мой профиль</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>Зарегистрироваться</DropdownMenuItem>
-                    <DropdownMenuItem>Авторизироваться</DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <Link href='/sign-up'>Зарегистрироваться</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <Link href='/sign-in'>Авторизироваться</Link>
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

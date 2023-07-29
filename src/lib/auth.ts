@@ -3,6 +3,9 @@ import { db } from './db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { nanoid } from 'nanoid';
 import GoogleProvider from 'next-auth/providers/google';
+import YandexProvider from 'next-auth/providers/yandex';
+import AppleProvider from 'next-auth/providers/apple';
+import VKProvider from 'next-auth/providers/vk';
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db),
@@ -16,6 +19,14 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
+        YandexProvider({
+            clientId: process.env.YANDEX_CLIENT_ID!,
+            clientSecret: process.env.YANDEX_CLIENT_SECRET!,
+        }),
+        VKProvider({
+            clientId: process.env.VK_CLIENT_ID!,
+            clientSecret: process.env.VK_CLIENT_SECRET!,
         }),
     ],
     callbacks: {

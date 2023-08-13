@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model User {
+  id                Int          @id @default(autoincrement())
+  createdAt         DateTime    @default(now())   @map("created_at")
+  updateAt          DateTime    @updatedAt        @map("updated_at")
+
+  firstName         String      @map("first_name")
+  lastName          String      @map("last_name")
+  avatarPath        String      @default("/uploads/devault-avatar.jpg") @map("avatat_path")
+
+  email             String?     @unique  
+  password          String
+
+  // accounts    Account[]
+  // sessions    Session[]
+  favorites         Drink[]
+  sensories         Sensory[] 
+  breweryVotes      BreweryVote[]
+  sensoryVotes      SensoryVote[]
+  drinkVotes        DrinkVote[]
+}
+
+model Sensory {
+  id            Int             @id @default(autoincrement())
+  // slug          String          @unique
+  images        String[]
+  text          String
+  rating        Int
+  createdAt     DateTime        @default(now())   @map("created_at")
+  updateAt      DateTime        @updatedAt        @map("updated_at")
+  author        User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId      Int             @map("author_id")
+  drink         Drink           @relation(fields: [drinkId], references: [id], onDelete: Cascade)
+  drinkId       Int             @map("drink_id")
+  votes         SensoryVote[]
+}
+
+model Drink {
+  id            Int             @id @default(autoincrement())
+  slug          String          @unique
+  name          String
+  description   String
+  images        String[]
+  brewery       Brewery         @relation(fields: [breweryId], references: [id], onDelete: Cascade)
+  breweryId     Int             @map("brewery_id")
+  sensories     Sensory[]
+  votes         DrinkVote[]
+  tag           Tag?              @relation(fields: [tagId], references: [id], onDelete: Restrict)
+  tagId         Int?
+  fanciers      User[]
+}
+
+model Brewery {
+  id            Int             @id @default(autoincrement())
+  slug          String          @unique
+  name          String
+  description   String
+  drinks        Drink[]
+  votes         BreweryVote[]
+}
+
+model Tag {
+  id            Int             @id @default(autoincrement())
+  createdAt     DateTime        @default(now())   @map("created_at")
+  updateAt      DateTime        @updatedAt        @map("updated_at")
+  slug          String          @unique
+  name          String          @unique
+  drinks        Drink[]        
+}
+
+model DrinkVote {
+  id            Int             @id @default(autoincrement())
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int             @map("user_id")
+  drink         Drink           @relation(fields: [drinkId], references: [id], onDelete: Cascade)
+  drinkId       Int             @map("drink_id")
+  type          VoteType
+
+  @@map("Drink_vote")
+}
+
+model SensoryVote {
+  id            Int             @id @default(autoincrement())
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int             @map("user_id")
+  sensory       Sensory         @relation(fields: [sensoryId], references: [id], onDelete: Cascade)
+  sensoryId     Int             @map("sensory_id")
+  type          VoteType
+
+  @@map("Sensory_vote")
+}
+
+model BreweryVote {
+  id              Int           @id @default(autoincrement())
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          Int           @map("user_id")
+  brewery         Brewery       @relation(fields: [breweryId], references: [id], onDelete: Cascade)
+  breweryId       Int           @map("brewery_id")
+  type            VoteType
+
+  @@map("Brewery_vote")
+}

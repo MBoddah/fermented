@@ -19,6 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast';
 import { Lock, Mail } from 'lucide-react';
+
 //Set form validations
 const formSchema = z.object({
     email: z
@@ -45,12 +46,11 @@ enum LoginSocials {
 }
 
 const AuthForm: FC = ({}) => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [loggingSocial, setLoggingSocial] = useState<LoginSocials | null>(null);
     const { toast } = useToast();
 
     const loginWithSocial = async (social: LoginSocials) => {
-        setIsLoading(true);
-
+        setLoggingSocial(social);
         try {
             await signIn(social.toLowerCase());
         } catch (error) {
@@ -60,7 +60,7 @@ const AuthForm: FC = ({}) => {
                 variant: 'destructive',
             });
         } finally {
-            setIsLoading(false);
+            setLoggingSocial(null);
         }
     };
 
@@ -136,6 +136,7 @@ const AuthForm: FC = ({}) => {
                     onClick={() => loginWithSocial(LoginSocials.GOOGLE)}
                     size='sm'
                     className='w-12 h-12 rounded-full'
+                    isLoading={loggingSocial === LoginSocials.GOOGLE}
                 >
                     <Icons.google className='h-6 w-6' />
                 </Button>
@@ -143,6 +144,7 @@ const AuthForm: FC = ({}) => {
                     onClick={() => loginWithSocial(LoginSocials.APPLE)}
                     size='sm'
                     className='w-12 h-12 rounded-full'
+                    isLoading={loggingSocial === LoginSocials.APPLE}
                 >
                     <Icons.apple className='h-6 w-6' />
                 </Button>
@@ -150,6 +152,7 @@ const AuthForm: FC = ({}) => {
                     onClick={() => loginWithSocial(LoginSocials.YANDEX)}
                     size='sm'
                     className='w-12 h-12 rounded-full'
+                    isLoading={loggingSocial === LoginSocials.YANDEX}
                 >
                     <Icons.yandex className='h-6 w-6' />
                 </Button>
@@ -157,13 +160,23 @@ const AuthForm: FC = ({}) => {
                     onClick={() => loginWithSocial(LoginSocials.VK)}
                     size='sm'
                     className='w-12 h-12 rounded-full'
+                    isLoading={loggingSocial === LoginSocials.VK}
                 >
                     <Icons.vk className='h-6 w-6' />
                 </Button>
             </div>
             <div className='flex flex-col text-center space-y-2 text-sm'>
-                <Button variant={'link'}>
-                    <Link href='/' type='g'>
+                <Button
+                    variant={'link'}
+                    onClick={() =>
+                        toast({
+                            title: 'Восстановление пароля временно недоступно',
+                            description: 'Приносим извенения за неудобоства',
+                            variant: 'destructive',
+                        })
+                    }
+                >
+                    <Link href='/sign-in' type='ghost'>
                         Забыли пароль?
                     </Link>
                 </Button>

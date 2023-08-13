@@ -17,6 +17,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast';
 import { Lock, Mail, User } from 'lucide-react';
+
 //Set form validations
 const formSchema = z
     .object({
@@ -46,7 +47,7 @@ const formSchema = z
     });
 
 const RegistrationForm: FC = ({}) => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const { toast } = useToast();
 
     //Form definition.
@@ -64,11 +65,7 @@ const RegistrationForm: FC = ({}) => {
     //Submit handler definition.
     //This is type-safe and validated.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        toast({
-            title: 'Авторизация через почту временно не работает',
-            description: 'Приносим извинения за неудобства',
-            variant: 'default',
-        });
+        setLoading(true);
     }
 
     return (
@@ -140,7 +137,7 @@ const RegistrationForm: FC = ({}) => {
                             </FormItem>
                         )}
                     />
-                    <Button type='submit' className='w-full text-xs !my-4'>
+                    <Button type='submit' className='w-full text-xs !my-4' isLoading={isLoading}>
                         Зарегистрироваться
                     </Button>
                 </form>

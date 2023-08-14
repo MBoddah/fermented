@@ -61,7 +61,7 @@ export class DrinkController {
     @HttpCode(200)
     @Auth()
     async create(@Body() dto: DrinkDto) {
-        return this.drinkService.create(1, dto);
+        return this.drinkService.create(2, dto);
     }
 
     //Update drink

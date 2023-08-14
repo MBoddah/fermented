@@ -28,11 +28,21 @@ const createDrinks = async (quantity: number) => {
                 slug: slug(breweryName + '-' + tagName + '-' + drinkName),
                 description: faker.commerce.productDescription(),
                 images: Array.from({ length: getRandomNumber(2, 6) }).map(() => faker.image.url()),
-                tag: {
-                    create: {
-                        name: tagName,
-                        slug: slug(tagName),
-                    },
+                tags: {
+                    create: [
+                        {
+                            name: tagName,
+                            slug: slug(tagName),
+                        },
+                        {
+                            name: tagName + '1',
+                            slug: slug(tagName + '1'),
+                        },
+                        {
+                            name: tagName + '2',
+                            slug: slug(tagName + '2'),
+                        },
+                    ],
                 },
                 brewery: {
                     create: {

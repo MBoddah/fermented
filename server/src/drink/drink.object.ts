@@ -11,7 +11,7 @@ export const drinkObject: Prisma.DrinkSelect = {
     brewery: {
         select: breweryObject,
     },
-    tag: {
+    tags: {
         select: tagObject,
     },
 };

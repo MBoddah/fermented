@@ -1,4 +1,4 @@
-import { ArrayMinSize, IsNumber, IsOptional, IsString, MinLength } from 'class-validator';
+import { ArrayMinSize, IsArray, IsNumber, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class DrinkDto {
     @IsString()
@@ -12,7 +12,8 @@ export class DrinkDto {
     @ArrayMinSize(1)
     images: string[];
 
-    @IsNumber()
+    @IsNumber({ allowInfinity: false, allowNaN: false }, { each: true })
+    @IsArray()
     @IsOptional()
-    tagId: number;
+    tagIds: number[];
 }

@@ -61,8 +61,7 @@ model Drink {
   breweryId     Int             @map("brewery_id")
   sensories     Sensory[]
   votes         DrinkVote[]
-  tag           Tag?              @relation(fields: [tagId], references: [id], onDelete: Restrict)
-  tagId         Int?
+  tags          Tag[]
   fanciers      User[]
 }
 
@@ -116,3 +115,13 @@ model BreweryVote {
 
   @@map("Brewery_vote")
 }
+
+// model DrinkTag{
+//   drinkId         Int           @map("drink_id")
+//   drink           Drink         @relation(fields: [drinkId], references: [id])
+//   tagId           Int           @map("tag_id")
+//   tag             Tag           @relation(fields: [tagId], references: [id])
+
+//   @@id([drinkId, tagId])
+//   @@map("Drink_tag")
+// }

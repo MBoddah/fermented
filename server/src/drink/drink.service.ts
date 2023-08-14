@@ -46,14 +46,14 @@ export class DrinkService {
     async byTag(id: number) {
         const drinks = await this.prisma.drink.findMany({
             where: {
-                tag: {
-                    id,
+                tags: {
+                    some: {
+                        id,
+                    },
                 },
             },
             select: drinkObject,
         });
-
-        if (!drinks) throw new NotFoundException('Drinks not found');
 
         return drinks;
     }
@@ -87,22 +87,32 @@ export class DrinkService {
     }
 
     async getSimilar(id: number) {
-        const current = await this.byId(id);
+        await this.byId(id);
+        const { tags, id: currentId } = await this.prisma.drink.findUnique({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+                tags: true,
+            },
+        });
 
-        if (!current) new NotFoundException('Current drink not found');
+        const tagIds = tags.map(t => t.id);
 
         const similar = await this.prisma.drink.findMany({
             where: {
-                tag: {
-                    id: current.tag.id,
+                tags: {
+                    some: {
+                        id: { in: tagIds },
+                    },
                 },
                 NOT: {
-                    id: current.id,
+                    id: currentId,
                 },
             },
             select: drinkObject,
         });
-
         return similar;
     }
 
@@ -132,6 +142,9 @@ export class DrinkService {
         //Get drink current data
         const drink = await this.byId(id);
         const drinkSlug = slug(drink.brewery.name + '-' + dto.name);
+        const tagConnections = dto.tagIds.map(id => {
+            return { id };
+        });
 
         if (await this.isSlugUsedByBrewery(drink.brewery.id, drinkSlug, id))
             throw new BadRequestException('Drink with this name already exists');
@@ -145,10 +158,8 @@ export class DrinkService {
                 description: dto.description,
                 images: dto.images,
                 slug: drinkSlug,
-                tag: {
-                    connect: {
-                        id: dto.tagId,
-                    },
+                tags: {
+                    connect: tagConnections,
                 },
             },
         });

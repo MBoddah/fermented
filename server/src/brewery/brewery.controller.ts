@@ -25,7 +25,7 @@ export class BreweryController {
     }
 
     //Get brewery by slug
-    @Get('slug/:slug')
+    @Get('by-slug/:slug')
     async getBySlug(@Param('slug') slug: string) {
         return this.breweryService.bySlug(slug);
     }

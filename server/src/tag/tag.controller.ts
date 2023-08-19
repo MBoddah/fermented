@@ -16,7 +16,7 @@ export class TagController {
     }
 
     //Get tag by slug
-    @Get('slug/:slug')
+    @Get('by-slug/:slug')
     async getBySlug(@Param('slug') slug: string) {
         return this.tagService.bySlug(slug);
     }

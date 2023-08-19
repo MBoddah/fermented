@@ -26,33 +26,27 @@ export class DrinkController {
     }
 
     //Get drink by slug
-    @Get('slug/:slug')
+    @Get('by-slug/:slug')
     async getBySlug(@Param('slug') slug: string) {
         return this.drinkService.bySlug(slug);
     }
 
     //Get drink by tag
-    @Get('tag/:tag')
+    @Get('by-tag/:tag')
     async getByTag(@Param('tag') tag: string) {
-        return this.drinkService.byTag(+tag);
+        return this.drinkService.byTag(tag);
     }
 
     //Get drink by brewery
-    @Get('brewery/:brewery')
+    @Get('by-brewery/:brewery')
     async getByBrewery(@Param('brewery') brewery: string) {
         return this.drinkService.byBrewery(+brewery);
     }
 
-    //Get drink sensories
-    @Get('sensories/:id')
-    async getSensories(@Param('id') id: string) {
-        return this.drinkService.getSensories(+id);
-    }
-
     //Get similar
-    @Get('similar/:tag')
-    async getSimilar(@Param('tag') tag: string) {
-        return this.drinkService.getSimilar(+tag);
+    @Get('similar/:id')
+    async getSimilar(@Param('id') id: string) {
+        return this.drinkService.getSimilar(+id);
     }
 
     //Create drink
@@ -73,7 +67,7 @@ export class DrinkController {
         return this.drinkService.update(+id, dto);
     }
 
-    //Delete tag
+    //Delete drink
     @HttpCode(200)
     @Auth()
     @Delete(':id')

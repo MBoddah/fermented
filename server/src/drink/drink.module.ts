@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { DrinkService } from './drink.service';
 import { DrinkController } from './drink.controller';
 import { PrismaService } from 'src/prisma.service';
-import { BreweryService } from 'src/brewery/brewery.service';
+import { BreweryModule } from 'src/brewery/brewery.module';
 
 @Module({
+    imports: [BreweryModule],
     controllers: [DrinkController],
-    providers: [DrinkService, PrismaService, BreweryService],
+    providers: [DrinkService, PrismaService],
     exports: [DrinkService],
 })
 export class DrinkModule {}

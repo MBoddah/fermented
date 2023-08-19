@@ -43,14 +43,17 @@ export class DrinkService {
     }
 
     //Get drinks by tag
-    async byTag(id: number) {
+    async byTag(slug: string) {
         const drinks = await this.prisma.drink.findMany({
             where: {
                 tags: {
                     some: {
-                        id,
+                        slug,
                     },
                 },
+            },
+            orderBy: {
+                id: 'asc',
             },
             select: drinkObject,
         });
@@ -66,6 +69,9 @@ export class DrinkService {
                     id,
                 },
             },
+            orderBy: {
+                id: 'asc',
+            },
             select: drinkObject,
         });
 
@@ -74,26 +80,14 @@ export class DrinkService {
         return drinks;
     }
 
-    //Get drink sensories
-    async getSensories(id: number) {
-        return this.prisma.drink.findMany({
-            where: {
-                id,
-            },
-            select: {
-                sensories: true,
-            },
-        });
-    }
-
     async getSimilar(id: number) {
         await this.byId(id);
-        const { tags, id: currentId } = await this.prisma.drink.findUnique({
+
+        const { tags } = await this.prisma.drink.findUnique({
             where: {
                 id,
             },
             select: {
-                id: true,
                 tags: true,
             },
         });
@@ -108,7 +102,7 @@ export class DrinkService {
                     },
                 },
                 NOT: {
-                    id: currentId,
+                    id,
                 },
             },
             select: drinkObject,

@@ -8,6 +8,20 @@ import { DrinkService } from 'src/drink/drink.service';
 export class SensoryService {
     constructor(private prisma: PrismaService, private drinkService: DrinkService) {}
 
+    async byDrink(id: number) {
+        //Check if drink exists
+        await this.drinkService.byId(id);
+
+        return await this.prisma.sensory.findMany({
+            where: {
+                drinkId: id,
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+    }
+
     //Get sensory by id
     async byId(id: number) {
         const sensory = await this.prisma.sensory.findUnique({

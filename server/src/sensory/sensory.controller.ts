@@ -38,6 +38,12 @@ export class SensoryController {
         return this.sensoryService.update(+id, dto);
     }
 
+    //Get sensories by drink
+    @Get('drink/:id')
+    async getByDrink(@Param('id') id: string) {
+        return this.sensoryService.byDrink(+id);
+    }
+
     //Delete sensory
     @HttpCode(200)
     @Auth()

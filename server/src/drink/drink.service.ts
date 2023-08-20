@@ -5,10 +5,15 @@ import { NotFoundException } from '@nestjs/common/exceptions';
 import * as slug from 'slug';
 import { DrinkDto } from './drink.dto';
 import { BreweryService } from 'src/brewery/brewery.service';
+import { TagService } from 'src/tag/tag.service';
 
 @Injectable()
 export class DrinkService {
-    constructor(private prisma: PrismaService, private breweryService: BreweryService) {}
+    constructor(
+        private prisma: PrismaService,
+        private breweryService: BreweryService,
+        private tagService: TagService,
+    ) {}
 
     // async getAll(dto: DrinkDto){
 
@@ -136,9 +141,14 @@ export class DrinkService {
         //Get drink current data
         const drink = await this.byId(id);
         const drinkSlug = slug(drink.brewery.name + '-' + dto.name);
-        const tagConnections = dto.tagIds.map(id => {
-            return { id };
-        });
+        const tagConnections = await Promise.all(
+            dto.tagIds.map(async id => {
+                //Check if tag exists
+                await this.tagService.byId(id);
+
+                return { id };
+            }),
+        );
 
         if (await this.isSlugUsedByBrewery(drink.brewery.id, drinkSlug, id))
             throw new BadRequestException('Drink with this name already exists');
@@ -153,6 +163,7 @@ export class DrinkService {
                 images: dto.images,
                 slug: drinkSlug,
                 tags: {
+                    disconnect: drink.tags,
                     connect: tagConnections,
                 },
             },
